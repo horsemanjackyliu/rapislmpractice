@@ -1,0 +1,44 @@
+unmanaged implementation in class zbp_dn_header_000 unique;
+//strict ( 2 ); //Uncomment this line in order to enable strict mode 2. The strict mode has two variants (strict(1), strict(2)) and is prerequisite to be future proof regarding syntax and to be able to release your BO.
+
+define behavior for ZDN_HEADER_000 //alias <alias_name>
+//late numbering
+lock master
+//authorization master ( instance )
+//etag master <field_name>
+{
+//  create ( authorization : global );
+//  update;
+//  delete;
+
+
+  field ( readonly ) delivery_document;
+
+  function suggestRoute result [1] zislm_result_000 ;
+  association _partners { create; }
+  association _items { create; }
+}
+
+define behavior for ZDN_ADDRESS_000 //alias <alias_name>
+//late numbering
+lock dependent by _header
+//authorization dependent by _header
+//etag master <field_name>
+{
+//  update;
+//  delete;
+  field ( readonly ) delivery_document, partner_function;
+  association _header;
+}
+
+define behavior for ZDN_ITEM_000 //alias <alias_name>
+//late numbering
+lock dependent by _headers
+//authorization dependent by _headers
+//etag master <field_name>
+{
+//  update;
+//  delete;
+  field ( readonly ) delivery_document, delivery_document_item;
+  association _headers;
+}

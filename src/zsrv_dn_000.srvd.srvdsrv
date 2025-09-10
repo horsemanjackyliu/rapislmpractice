@@ -1,0 +1,6 @@
+@EndUserText.label: 'Outbound Delivery Document Service'
+define service ZSRV_DN_000 {
+  expose ZDN_HEADER_000;
+  expose ZDN_ITEM_000;
+  expose ZDN_ADDRESS_000;
+}
